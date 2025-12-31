@@ -55,9 +55,9 @@
 
     <!-- Section Boutique / Articles -->
     <section id="boutique" class="shop-section">
-        <div class="container">
+      <!-- <div class="container">
             <h2 class="section-title">Nos Créations</h2>
-            <div class="product-grid">
+            <div class="product-grid">-->
                 
                 <!-- STRUCTURE VIDE POUR UN ARTICLE (À copier-coller pour chaque nouveau produit) -->
                 <!-- 
@@ -74,10 +74,39 @@
                 -->
 
                 <!-- Message informatif si la boutique est vide -->
-                <p class="empty-msg">Les nouvelles créations seront bientôt disponibles ici.</p>
+               <!-- <p class="empty-msg">Les nouvelles créations seront bientôt disponibles ici.</p> -->
 
-            </div>
-        </div>
+            <!--</div>
+        </div>-->
+        <?php
+require 'config/db.php';
+$stmt = $pdo->query("SELECT * FROM articles WHERE is_active = 1 ORDER BY created_at DESC");
+$articles = $stmt->fetchAll();
+?>
+
+<div class="product-grid">
+    <?php if (empty($articles)): ?>
+        <p class="empty-msg">Les nouvelles créations seront bientôt disponibles ici.</p>
+    <?php else: ?>
+        <?php foreach ($articles as $article): ?>
+            <article class="product-card">
+                <div class="product-image">
+                    <img src="uploads/creations/<?= $article['image_url'] ?>" alt="<?= $article['nom'] ?>">
+                </div>
+                <div class="product-info">
+                    <h3><?= htmlspecialchars($article['nom']) ?></h3>
+                    <p class="price"><?= number_format($article['prix_cfa'], 0, ',', ' ') ?> FCFA</p>
+                    
+                    <!-- Formulaire de commande simple -->
+                    <form action="actions/passer_commande.php" method="POST">
+                        <input type="hidden" name="article_id" value="<?= $article['id'] ?>">
+                        <button type="submit" class="btn-order">Commander</button>
+                    </form>
+                </div>
+            </article>
+        <?php endforeach; ?>
+    <?php endif; ?>
+</div>
     </section>
 
     <!-- Section Avis Clients -->
