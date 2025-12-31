@@ -15,7 +15,7 @@
         <nav class="nav-container">
             <div class="logo-area">
                 <!-- Emplacement pour le logo manuel -->
-                <a href="#" class="logo-placeholder">[ Emplacement Logo Ar Tricot ]</a>
+                <a href="#" class="logo-placeholder">Bienvenue chez Ar Tricot </a>
             </div>
             <ul class="nav-links">
                 <li><a href="#accueil">Accueil</a></li>
@@ -47,7 +47,7 @@
                 </div>
                 <div class="about-image-slot">
                     <!-- Emplacement pour une image de l'atelier ou de la créatrice -->
-                    <div class="image-empty-state">Photo de l'atelier à insérer</div>
+                    <div class="image-empty-state"><img src="image/logo.jpg" alt=""></div>
                 </div>
             </div>
         </div>
@@ -55,57 +55,104 @@
 
     <!-- Section Boutique / Articles -->
     <section id="boutique" class="shop-section">
-      <!-- <div class="container">
+       <div class="container">
             <h2 class="section-title">Nos Créations</h2>
             <div class="product-grid">-->
                 
                 <!-- STRUCTURE VIDE POUR UN ARTICLE (À copier-coller pour chaque nouveau produit) -->
-                <!-- 
+                
                 <article class="product-card">
                     <div class="product-image">
-                        <img src="chemin/vers/votre-image.jpg" alt="Description de l'article">
+                        <img src="image/bikini.jpeg" alt="Description de l'article">
                     </div>
                     <div class="product-info">
-                        <h3>Nom de la création</h3>
-                        <p class="price">00 FCFA</p>
+                        <h3></h3>Bikini crochet
+                        <p class="price">10 000 FCFA</p>
                         <button class="btn-order">Commander</button>
                     </div>
                 </article> 
-                -->
+                 <article class="product-card">
+                    <div class="product-image">
+                        <img src="image/bonnnet.jpeg" alt="Description de l'article">
+                    </div>
+                    <div class="product-info">
+                        <h3>Bonnet Crochet Noir</h3>
+                        <p class="price">7000 FCFA</p>
+                        <button class="btn-order">Commander</button>
+                    </div>
+                </article> 
+                <article class="product-card">
+                    <div class="product-image">
+                        <img src="image/granny.jpeg" alt="Description de l'article">
+                    </div>
+                    <div class="product-info">
+                        <h3>Chemise Granny Sasha</h3>
+                        <p class="price">25 000 FCFA</p>
+                        <button class="btn-order">Commander</button>
+                    </div>
+                </article> 
+                <article class="product-card">
+                    <div class="product-image">
+                        <img src="image/jenni.jpeg" alt="Description de l'article">
+                    </div>
+                    <div class="product-info">
+                        <h3>Sac JENNIE</h3>
+                        <p class="price">18 000 FCFA</p>
+                        <button class="btn-order">Commander</button>
+                    </div>
+                </article> 
+                <article class="product-card">
+                    <div class="product-image">
+                        <img src="image/perle.jpeg" alt="Description de l'article">
+                    </div>
+                    <div class="product-info">
+                        <h3>Top en Perle</h3>
+                        <p class="price">10 000 FCFA</p>
+                        <button class="btn-order">Commander</button>
+                    </div>
+                </article> 
+                <article class="product-card">
+                    <div class="product-image">
+                        <img src="image/zeinab.jpeg" alt="Description de l'article">
+                    </div>
+                    <div class="product-info">
+                        <h3>Ensemble Zeinab</h3>
+                        <p class="price">35 000 FCFA</p>
+                        <button class="btn-order">Commander</button>
+                    </div>
+                </article> 
+                <article class="product-card">
+                    <div class="product-image">
+                        <img src="image/pull.jpeg" alt="Description de l'article">
+                    </div>
+                    <div class="product-info">
+                        <h3>Pull Pokemon bébé</h3>
+                        <p class="price">15 000 FCFA</p>
+                        <button class="btn-order">Commander</button>
+                    </div>
+                </article> 
+                <article class="product-card">
+                    <div class="product-image">
+                        <img src="image/reine.jpeg" alt="Description de l'article">
+                    </div>
+                    <div class="product-info">
+                        <h3>Ensemble REINE</h3>
+                        <p class="price">25 000 FCFA </p>
+                        <button class="btn-order">Commander</button>
+                    </div>
+                </article> 
+
+            </div>
 
                 <!-- Message informatif si la boutique est vide -->
-               <!-- <p class="empty-msg">Les nouvelles créations seront bientôt disponibles ici.</p> -->
+               <p class="empty-msg">Les nouvelles créations seront bientôt disponibles ici.</p> 
 
-            <!--</div>
-        </div>-->
-        <?php
-require 'config/db.php';
-$stmt = $pdo->query("SELECT * FROM articles WHERE is_active = 1 ORDER BY created_at DESC");
-$articles = $stmt->fetchAll();
-?>
+            </div>
+        </div>
+    
 
 <div class="product-grid">
-    <?php if (empty($articles)): ?>
-        <p class="empty-msg">Les nouvelles créations seront bientôt disponibles ici.</p>
-    <?php else: ?>
-        <?php foreach ($articles as $article): ?>
-            <article class="product-card">
-                <div class="product-image">
-                    <img src="uploads/creations/<?= $article['image_url'] ?>" alt="<?= $article['nom'] ?>">
-                </div>
-                <div class="product-info">
-                    <h3><?= htmlspecialchars($article['nom']) ?></h3>
-                    <p class="price"><?= number_format($article['prix_cfa'], 0, ',', ' ') ?> FCFA</p>
-                    
-                    <!-- Formulaire de commande simple -->
-                    <form action="actions/passer_commande.php" method="POST">
-                        <input type="hidden" name="article_id" value="<?= $article['id'] ?>">
-                        <button type="submit" class="btn-order">Commander</button>
-                    </form>
-                </div>
-            </article>
-        <?php endforeach; ?>
-    <?php endif; ?>
+   
 </div>
     </section>
 
