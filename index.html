@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ar Tricot | À la limite de la perfection</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Importation de polices élégantes -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <!-- En-tête / Navigation -->
+    <header class="main-header">
+        <nav class="nav-container">
+            <div class="logo-area">
+                <!-- Emplacement pour le logo manuel -->
+                <a href="#" class="logo-placeholder">[ Emplacement Logo Ar Tricot ]</a>
+            </div>
+            <ul class="nav-links">
+                <li><a href="#accueil">Accueil</a></li>
+                <li><a href="#a-propos">À propos</a></li>
+                <li><a href="#boutique">Boutique</a></li>
+                <li><a href="#avis">Avis</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Section Hero -->
+    <section id="accueil" class="hero">
+        <div class="hero-content">
+            <h1>Ar Tricot</h1>
+            <p class="slogan">« Ar Tricot, à la limite de la perfection »</p>
+            <a href="#boutique" class="btn-primary">Découvrir les créations</a>
+        </div>
+    </section>
+
+    <!-- Section À Propos -->
+    <section id="a-propos" class="about-section">
+        <div class="container">
+            <h2 class="section-title">À propos de Ar Tricot</h2>
+            <div class="about-grid">
+                <div class="about-text">
+                    <p>Bienvenue dans l'univers de Ar Tricot. Chaque maille est une promesse de qualité, chaque création est une pièce unique façonnée avec passion et précision.</p>
+                    <p>Ici, le travail manuel rencontre l'élégance moderne pour offrir des pièces qui traversent le temps.</p>
+                </div>
+                <div class="about-image-slot">
+                    <!-- Emplacement pour une image de l'atelier ou de la créatrice -->
+                    <div class="image-empty-state">Photo de l'atelier à insérer</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section Boutique / Articles -->
+    <section id="boutique" class="shop-section">
+        <div class="container">
+            <h2 class="section-title">Nos Créations</h2>
+            <div class="product-grid">
+                
+                <!-- STRUCTURE VIDE POUR UN ARTICLE (À copier-coller pour chaque nouveau produit) -->
+                <!-- 
+                <article class="product-card">
+                    <div class="product-image">
+                        <img src="chemin/vers/votre-image.jpg" alt="Description de l'article">
+                    </div>
+                    <div class="product-info">
+                        <h3>Nom de la création</h3>
+                        <p class="price">00 FCFA</p>
+                        <button class="btn-order">Commander</button>
+                    </div>
+                </article> 
+                -->
+
+                <!-- Message informatif si la boutique est vide -->
+                <p class="empty-msg">Les nouvelles créations seront bientôt disponibles ici.</p>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Section Avis Clients -->
+    <section id="avis" class="reviews-section">
+        <div class="container">
+            <h2 class="section-title">Avis clients</h2>
+            
+            <div class="reviews-display">
+                <!-- Les avis apparaîtront ici manuellement -->
+                <p class="empty-msg-light">Aucun avis pour le moment.</p>
+            </div>
+
+            <div class="review-form-container">
+                <h3>Partager votre expérience</h3>
+                <p class="form-disclaimer">Note : Vos informations sont transmises en toute confidentialité et ne sont visibles que par l'administratrice.</p>
+                <form class="clean-form">
+                    <div class="form-group">
+                        <label for="review-name">Nom complet</label>
+                        <input type="text" id="review-name" name="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="review-contact">Contact (Email ou Numéro)</label>
+                        <input type="text" id="review-contact" name="contact" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="review-text">Votre avis / commentaire</label>
+                        <textarea id="review-text" name="message" rows="4" required></textarea>
+                    </div>
+                    <button type="submit" class="btn-submit-dark">Envoyer l'avis</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section Contact & Enregistrement -->
+    <section id="contact" class="contact-section">
+        <div class="container">
+            <h2 class="section-title">Contactez-nous</h2>
+            <div class="contact-wrapper">
+                <form class="clean-form">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="name">Votre nom</label>
+                            <input type="text" id="name" name="name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Votre Email / Téléphone</label>
+                            <input type="text" id="email" name="contact" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Votre message</label>
+                        <textarea id="message" name="message" rows="5" required></textarea>
+                    </div>
+                    <button type="submit" class="btn-submit">Envoyer le message</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pied de page -->
+    <footer class="main-footer">
+        <div class="container">
+            <p>&copy; 2025 Ar Tricot. Tous droits réservés.</p>
+            <p class="footer-slogan">À la limite de la perfection</p>
+        </div>
+    </footer>
+
+</body>
+</html>
