@@ -19,7 +19,7 @@
     background-image: url('image/acceuil.jpeg'); 
     background-size: cover;
     background-position: center;
-    opacity: 0.2;       /* Ajustez ici la transparence (0.1 à 1) */
+    opacity: 0.45;       /* Ajustez ici la transparence (0.1 à 1) */
     z-index: 1;         /* Place l'image derrière le contenu */
 }
 
@@ -81,7 +81,7 @@ h1, h2, h3 {
 .section-title {
     text-align: center;
     font-size: 2.5rem;
-    margin-bottom: 3rem;
+    margin-bottom: 4rem;
     position: relative;
 }
 
@@ -121,6 +121,24 @@ h1, h2, h3 {
     font-size: 1.5rem;
     border: 1px dashed var(--accent-color);
     padding: 5px 15px;
+}
+
+.logo-placeholder {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.site-logo {
+    width: 40px;
+    height: 40px;
+    object-fit: cover;
+    border-radius: 6px;
+    display: block;
+}
+
+@media (max-width: 768px) {
+    .site-logo { width: 32px; height: 32px; }
 }
 
 .nav-links {
@@ -211,9 +229,24 @@ section {
     justify-content: center;
     color: var(--text-light);
     font-style: italic;
+    padding-top: 20px;
 }
 
-/* --- Boutique / Produits --- */
+.image-empty-state img {
+    display: block;
+    max-width: 60%;
+    width: auto;
+    height: auto;
+    margin: 0 auto;
+}
+
+@media (max-width: 768px) {
+    .image-empty-state img {
+        max-width: 80%;
+    }
+}
+
+        position: relative; /* nécessaire pour positionner la croix en absolu */
 .shop-section {
     background-color: #fff;
 }
@@ -299,6 +332,46 @@ section {
     box-shadow: 0 10px 30px rgba(0,0,0,0.05);
 }
 
+.reviews-display {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 20px;
+    margin-bottom: 30px;
+}
+
+.review-card {
+    background: var(--white);
+    border: 1px solid #eee;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.03);
+}
+
+/* Stars for review rating */
+.stars { display:flex; gap:6px; align-items:center; margin-top:8px }
+.star { width:22px; height:22px; display:inline-block; background:transparent; cursor:pointer; filter:grayscale(100%); opacity:0.9 }
+.star svg { width:100%; height:100%; }
+.star.on { filter:none; }
+.star.on svg path { fill: #f5c542; }
+.star svg path { fill: #ddd; transition: fill 0.12s ease; }
+.star-count { font-size:0.85rem; color:var(--text-light); margin-left:8px }
+
+.review-actions { margin-top:10px; display:flex; gap:8px; align-items:center }
+.btn-edit { background:transparent; border:1px solid #ddd; padding:6px 10px; border-radius:6px; cursor:pointer }
+.edit-area { margin-top:10px }
+
+.review-text {
+    font-style: italic;
+    color: var(--text-main);
+    margin-bottom: 12px;
+}
+
+.review-author {
+    font-weight: 700;
+    color: var(--accent-color);
+    text-align: right;
+}
+
 .form-disclaimer {
     font-size: 0.8rem;
     color: var(--accent-color);
@@ -351,24 +424,6 @@ section {
     margin-top: 10px;
 }
 
-/* --- Responsive --- */
-@media (max-width: 768px) {
-    .nav-links { display: none; } /* Simplicité pour le mobile sans JS */
-    .hero-content h1 { font-size: 3rem; }
-    .about-grid { grid-template-columns: 1fr; }
-    .section-title { font-size: 2rem; }
-}
-.social-links {
-    margin-top: 30px;
-    text-align: center;
-}
-
-.social-links h3 {
-    color: #000;
-    margin-bottom: 20px;
-    font-family: serif;
-}
-
 .social-icons {
     display: flex;
     justify-content: center;
@@ -394,4 +449,187 @@ section {
     width: 40px;  /* Taille des logos */
     height: 40px;
     margin-bottom: 8px;
+}
+
+/* --- Image modal & gallery thumbnails --- */
+.image-modal {
+    position: fixed;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0,0,0,0.96); /* presque opaque pour masquer l'arrière-plan */
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    z-index: 9999;
+    padding: 20px;
+}
+.image-modal.hidden { display: none; }
+.image-modal .modal-inner {
+    position: relative;
+    width: 100%;
+    max-height: 95vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+}
+.image-modal .modal-img {
+    width: auto;
+    max-width: 95vw; /* plus large */
+    max-height: 95vh; /* occupe presque tout l'écran */
+    object-fit: contain;
+    border-radius: 6px;
+}
+/* Close button for image modal */
+.image-modal .modal-close {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    background: rgba(0,0,0,0.6);
+    color: #fff;
+    border: none;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 10002;
+}
+.order-modal .modal-close {
+    /* placer la petite croix en haut à droite (au bout du logo) */
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    bottom: auto;
+    background: rgba(0,0,0,0.6);
+    color: #fff;
+    border: none;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    font-size: 16px;
+    line-height: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+/* cleaned stray rules */
+        /* override pour la modal de commande : placer en bas à droite */
+        position: absolute;
+        bottom: 12px;
+        right: 12px;
+        top: auto;
+    align-items: center;
+    justify-content: center;
+}
+.image-modal .modal-prev { left: 18px; }
+.image-modal .modal-next { right: 18px; }
+.image-modal .modal-counter {
+    position: absolute;
+    bottom: 12px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: #fff;
+    font-weight: 600;
+}
+
+/* Thumbnails inside product card when multiple images are present */
+.product-image { position: relative; }
+.product-image .thumbs {
+    display: flex;
+    gap: 8px;
+    margin-top: 10px;
+}
+.product-image .thumbs img {
+    width: 64px;
+    height: 64px;
+    object-fit: cover;
+    border-radius: 6px;
+    cursor: pointer;
+    border: 2px solid transparent;
+}
+.product-image .thumbs img:hover { border-color: var(--accent-color); }
+
+@media (max-width: 768px) {
+    .image-modal .modal-prev { left: 6px; }
+    .image-modal .modal-next { right: 6px; }
+    .product-image .thumbs img { width: 48px; height: 48px; }
+}
+
+/* --- Order modal styles --- */
+.order-modal {
+    position: fixed;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0,0,0,0.96); /* overlay sombre comme image modal */
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    z-index: 10001; /* au-dessus du reste */
+    padding: 20px;
+}
+.order-modal.hidden { display: none; }
+.order-modal .order-inner {
+    width: 100%;
+    max-width: 680px;
+    background: #fff;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.25);
+    max-height: 90vh; /* Permet de scroller si le formulaire est long */
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch; /* défilement fluide sur iOS */
+    display: flex;
+    flex-direction: column;
+}
+
+.order-logo {
+    display: block;
+    width: 90px;
+    height: auto;
+    margin: 0 auto 10px;
+    border-radius: 6px;
+}
+
+.error-message {
+    color: var(--accent-color); /* message neutre, pas rouge */
+    font-size: 0.9rem;
+    margin-top: 6px;
+    min-height: 18px;
+}
+
+.btn-confirm:disabled {
+    opacity: 0.85; /* moins transparent pour être plus visible */
+    cursor: not-allowed;
+    filter: none;
+    background: #000; /* couleur noire demandée */
+    color: #fff;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+}
+.order-modal h3 { margin-bottom: 12px; }
+.order-form .form-row { display: flex; gap: 10px; }
+.order-form .form-group { margin-bottom: 12px; flex: 1; }
+.order-form label { display: block; margin-bottom: 6px; font-weight: 600; }
+.order-form input[type="text"], .order-form textarea, .order-form select, .order-form input[type="number"] { width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 6px; }
+.order-actions { display:flex; gap:10px; margin-top:12px; }
+.btn-cancel { background: transparent; border: 1px solid #ccc; padding: 10px 14px; border-radius: 6px; cursor: pointer; }
+.btn-confirm { background: var(--accent-color); color: #fff; border: none; padding: 10px 14px; border-radius: 6px; cursor: pointer; }
+
+/* Les actions suivent le flux : elles défilent avec le formulaire */
+.order-actions { position: static; background: transparent; padding-top: 8px; display:flex; gap:10px; margin-top:12px; }
+
+.payment-options { display:flex; gap:12px; align-items:center; margin-top:8px; }
+.payment-option { display:flex; align-items:center; gap:8px; padding:8px 10px; border-radius:8px; border:1px solid #eee; cursor:pointer; }
+.payment-option input { margin-right:6px; }
+.payment-option img { width:36px; height:36px; }
+
+@media (max-width:600px){
+    .order-modal .order-inner { padding:14px; }
+    .order-form .form-row { flex-direction: column; }
 }

@@ -1,14 +1,32 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <meta charset="UTF-8">
+    <meta charset="UTF-8"> 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content=" Ar Tricot est une marque artisanale ivoirienne spécialisée dans le tricot et le crochet faits main. Créations uniques, accessoires et pièces sur mesure, réalisés avec soin et passion.">
-    <meta name="keywords" content="Crochet Abidjan">
+    <meta name="keywords" content="Crochet Abidjan , tricot Abidjan,crochet,formation crochet,Ar Tricot,Tuto,Arlene Assoua ">
+    <!-- Open Graph / Facebook -->
+    <meta property="og:title" content="Ar Tricot | À la limite de la perfection">
+    <meta property="og:description" content="Ar Tricot est une marque artisanale ivoirienne spécialisée dans le tricot et le crochet faits main. Créations uniques, accessoires et pièces sur mesure, réalisés avec soin et passion.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="/">
+    <meta property="og:image" content="image/logo.jpg">
+    <meta property="og:site_name" content="Ar Tricot">
+
+    <!-- TikTok & WhatsApp (remplacement des balises Twitter) -->
+    <!-- Open Graph est utilisé par WhatsApp/TikTok; on ajoute des meta explicites demandées -->
+    <meta name="tiktok:title" content="Ar Tricot | À la limite de la perfection">
+    <meta name="tiktok:description" content="Ar Tricot est une marque artisanale ivoirienne spécialisée dans le tricot et le crochet faits main.">
+    <meta name="tiktok:image" content="image/logo.jpg">
+
+    <meta name="whatsapp:phone_number" content="+2250768633906">
+    <meta name="whatsapp:description" content="Contactez-nous via WhatsApp pour commandes et informations : 07 68 63 39 06">
     <title>Ar Tricot | À la limite de la perfection</title>
     <link rel="stylesheet" href="style.css">
     <!-- Importation de polices élégantes -->
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="shortcut icon" href="image/logo.jpg" type="image/x-icon">
+    
 </head>
 <body>
 
@@ -17,7 +35,10 @@
         <nav class="nav-container">
             <div class="logo-area">
                 <!-- Emplacement pour le logo manuel -->
-                <a href="#" class="logo-placeholder">Bienvenue chez Ar Tricot </a>
+                <a href="#" class="logo-placeholder">
+                    <img src="image/logo.jpg" alt="Ar Tricot logo" class="site-logo">
+                    <span class="logo-text">Bienvenue chez Ar Tricot</span>
+                </a>
             </div>
             <ul class="nav-links">
                 <li><a href="#accueil">Accueil</a></li>
@@ -44,8 +65,7 @@
             <h2 class="section-title">À propos de Ar Tricot</h2>
             <div class="about-grid">
                 <div class="about-text">
-                    <p>Bienvenue dans l'univers de Ar Tricot. Chaque maille est une promesse de qualité, chaque création est une pièce unique façonnée avec passion et précision.</p>
-                    <p>Ici, le travail manuel rencontre l'élégance moderne pour offrir des pièces qui traversent le temps.</p>
+                    <p>Bienvenue dans notre boutique de crochet où chaque fil raconte une histoire et chaque création est une œuvre d'art unique. Explorez notre sélection de fils colorés, de crochets précis et d'inspiration infinie pour donner vie à vos projets les plus imaginatifs. Que vous soyez un novice enthousiaste ou un expert chevronné, notre boutique est votre destination pour cultiver votre passion du crochet et créer des pièces qui émerveilleront.</p>
                 </div>
                 <div class="about-image-slot">
                     <!-- Emplacement pour une image de l'atelier ou de la créatrice -->
@@ -163,27 +183,27 @@
         <div class="container">
             <h2 class="section-title">Avis clients</h2>
             
-            <div class="reviews-display">
-                <!-- Les avis apparaîtront ici manuellement -->
-                <p class="empty-msg-light">Aucun avis pour le moment.</p>
+            <div id="reviewsList" class="reviews-display">
+                <!-- Les avis seront chargés dynamiquement ici -->
             </div>
 
             <div class="review-form-container">
                 <h3>Partager votre expérience</h3>
                 <p class="form-disclaimer">Note : Vos informations sont transmises en toute confidentialité et ne sont visibles que par l'administratrice.</p>
-                <form class="clean-form">
+                <form id="reviewForm" class="clean-form">
                     <div class="form-group">
                         <label for="review-name">Nom complet</label>
                         <input type="text" id="review-name" name="name" required>
                     </div>
                     <div class="form-group">
-                        <label for="review-contact">Contact (Email ou Numéro)</label>
-                        <input type="text" id="review-contact" name="contact" required>
+                        <label>Contact (numéro)</label>
+                        <input type="tel" id="review-contact" name="contact" placeholder="+2250768633906" required inputmode="numeric" pattern="[0-9+]{6,20}" maxlength="20">
                     </div>
                     <div class="form-group">
                         <label for="review-text">Votre avis / commentaire</label>
                         <textarea id="review-text" name="message" rows="4" required></textarea>
                     </div>
+                    <!-- Note retirée du formulaire : les étoiles sont affichées uniquement sur les avis publiés -->
                     <button type="submit" class="btn-submit-dark">Envoyer l'avis</button>
                 </form>
             </div>
@@ -242,6 +262,459 @@
             <p class="footer-slogan">À la limite de la perfection</p>
         </div>
     </footer>
+
+    <!-- Image modal (s'active quand on clique sur une image de création) -->
+    <div id="imageModal" class="image-modal hidden" aria-hidden="true">
+        <div class="modal-inner" role="dialog" aria-modal="true">
+            <button class="modal-close" aria-label="Fermer">×</button>
+            <button class="modal-prev" aria-label="Image précédente">‹</button>
+            <img src="" alt="Agrandissement" class="modal-img">
+            <button class="modal-next" aria-label="Image suivante">›</button>
+            <div class="modal-counter" aria-hidden="true"></div>
+        </div>
+    </div>
+
+    <!-- Order modal -->
+    <div id="orderModal" class="order-modal hidden" aria-hidden="true">
+        <div class="order-inner" role="dialog" aria-modal="true">
+            <button class="modal-close" id="orderClose" aria-label="Fermer">×</button>
+            <img src="image/logo.jpg" alt="Ar Tricot" class="order-logo">
+            <h3>Passer commande</h3>
+            <form id="orderForm" class="order-form">
+                <input type="hidden" id="order_product_code" name="product_code">
+                <div class="form-group">
+                    <label>Produit</label>
+                    <div id="order_product_name" style="font-weight:700; margin-bottom:8px"></div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Votre nom</label>
+                        <input type="text" id="order_customer_name" required>
+                        <div class="error-message" id="err_order_customer_name"></div>
+                    </div>
+                    <div class="form-group">
+                        <label>Contact</label>
+                        <div style="display:flex;gap:8px;align-items:center">
+                            <select id="order_contact_type" style="width:140px;padding:8px;border-radius:6px;border:1px solid #ddd;background:#fff">
+                                <option value="phone" selected>Numéro</option>
+                                <option value="email">Email</option>
+                            </select>
+                            <input type="text" id="order_contact" placeholder="Ex: +2250768633906" style="flex:1" required>
+                        </div>
+                        <div class="error-message" id="err_order_contact"></div>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Taille</label>
+                        <select id="order_size">
+                            <option value="S">S</option>
+                            <option value="M">M</option>
+                            <option value="L">L</option>
+                            <option value="XL">XL</option>
+                            <option value="2XL">2XL</option>
+                        </select>
+                        <div class="error-message" id="err_order_size"></div>
+                    </div>
+                    <div class="form-group">
+                        <label>Couleur</label>
+                        <input type="text" id="order_color" placeholder="Ex: rouge, noir...">
+                        <div class="error-message" id="err_order_color"></div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Adresse / lieu de livraison</label>
+                    <input type="text" id="order_delivery" required>
+                    <div class="error-message" id="err_order_delivery"></div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Quantité</label>
+                        <input type="number" id="order_quantity" min="1" value="1">
+                        <div class="error-message" id="err_order_quantity"></div>
+                    </div>
+                    <div class="form-group">
+                        <label>Mode de paiement</label>
+                        <div class="payment-options">
+                            <label class="payment-option"><input type="radio" name="payment" value="wave" checked><img src="image/wave.png" alt="Wave">Wave</label>
+                            <label class="payment-option"><input type="radio" name="payment" value="orange_money"><img src="image/om.png" alt="Orange Money">Orange Money</label>
+                        </div>
+                        <div class="error-message" id="err_order_payment"></div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Remarques (optionnel)</label>
+                    <textarea id="order_note" rows="3"></textarea>
+                </div>
+                <div class="order-actions">
+                    <button type="button" class="btn-cancel" id="btnOrderCancel">Annuler</button>
+                    <button type="submit" class="btn-confirm" id="btnOrderSubmit" disabled>Confirmer la commande</button>
+                </div>
+                <div id="err_order_form_global" class="error-message" style="text-align:center;margin-top:8px"></div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+    (function(){
+        const modal = document.getElementById('imageModal');
+        const modalImg = modal.querySelector('.modal-img');
+        const btnClose = modal.querySelector('.modal-close');
+        const btnPrev = modal.querySelector('.modal-prev');
+        const btnNext = modal.querySelector('.modal-next');
+        const counter = modal.querySelector('.modal-counter');
+        let currentImages = [];
+        let currentIndex = 0;
+
+        function openModal(images, index){
+            currentImages = images;
+            currentIndex = index || 0;
+            modalImg.src = currentImages[currentIndex];
+            counter.textContent = `${currentIndex+1} / ${currentImages.length}`;
+            modal.classList.remove('hidden');
+            modal.setAttribute('aria-hidden', 'false');
+            document.body.style.overflow = 'hidden';
+            document.addEventListener('keydown', keyHandler);
+        }
+
+        function closeModal(){
+            modal.classList.add('hidden');
+            modal.setAttribute('aria-hidden', 'true');
+            modalImg.src = '';
+            document.body.style.overflow = '';
+            document.removeEventListener('keydown', keyHandler);
+        }
+
+        function showIndex(i){
+            if(!currentImages.length) return;
+            currentIndex = (i + currentImages.length) % currentImages.length;
+            modalImg.src = currentImages[currentIndex];
+            counter.textContent = `${currentIndex+1} / ${currentImages.length}`;
+        }
+
+        function keyHandler(e){
+            if(e.key === 'Escape') closeModal();
+            if(e.key === 'ArrowLeft') showIndex(currentIndex-1);
+            if(e.key === 'ArrowRight') showIndex(currentIndex+1);
+        }
+
+        btnClose.addEventListener('click', closeModal);
+        btnPrev.addEventListener('click', () => showIndex(currentIndex-1));
+        btnNext.addEventListener('click', () => showIndex(currentIndex+1));
+
+        // Close when clicking outside the image area
+        modal.addEventListener('click', function(e){
+            if(e.target === modal) closeModal();
+        });
+
+        // Scan product cards and wire images
+        document.querySelectorAll('.product-card').forEach(card => {
+            const container = card.querySelector('.product-image');
+            if(!container) return;
+            const imgs = Array.from(container.querySelectorAll('img'));
+            if(imgs.length === 0) return;
+
+            // If multiple images: hide extras and create thumbnail strip
+            if(imgs.length > 1){
+                // Hide original extra full-size images (keep first displayed)
+                imgs.forEach((im, idx) => { if(idx>0) im.style.display = 'none'; });
+
+                const thumbs = document.createElement('div');
+                thumbs.className = 'thumbs';
+                imgs.forEach((im, idx) => {
+                    const t = document.createElement('img');
+                    t.src = im.src;
+                    t.alt = im.alt || '';
+                    t.dataset.index = idx;
+                    t.addEventListener('click', (ev) => {
+                        openModal(imgs.map(x=>x.src), idx);
+                    });
+                    thumbs.appendChild(t);
+                });
+                container.appendChild(thumbs);
+            }
+
+            // Make the visible/main image clickable
+            const mainImg = imgs[0];
+            if(mainImg){
+                mainImg.style.cursor = 'zoom-in';
+                mainImg.addEventListener('click', () => {
+                    openModal(imgs.map(x=>x.src), 0);
+                });
+            }
+        });
+        // --- Order modal behavior ---
+        const orderModal = document.getElementById('orderModal');
+        const orderClose = document.getElementById('orderClose');
+        const btnOrderCancel = document.getElementById('btnOrderCancel');
+        const orderForm = document.getElementById('orderForm');
+
+        function openOrderModal(product) {
+            document.getElementById('order_product_code').value = product.code;
+            document.getElementById('order_product_name').textContent = product.name;
+            orderModal.classList.remove('hidden');
+            orderModal.setAttribute('aria-hidden','false');
+            document.body.style.overflow = 'hidden';
+        }
+        function closeOrderModal(){
+            orderModal.classList.add('hidden');
+            orderModal.setAttribute('aria-hidden','true');
+            document.body.style.overflow = '';
+            orderForm.reset();
+        }
+
+        // Attach click on Commander buttons
+        document.querySelectorAll('.btn-order').forEach(btn => {
+            btn.addEventListener('click', function(){
+                const card = btn.closest('.product-card');
+                let nameEl = card.querySelector('.product-info h3');
+                let name = nameEl ? nameEl.textContent.trim() : (card.querySelector('.product-info').textContent.trim() || 'Produit');
+                let code = card.dataset.code || ('PROD-' + Math.random().toString(36).slice(2,8)).toUpperCase();
+                openOrderModal({code, name});
+            });
+        });
+
+        orderClose.addEventListener('click', closeOrderModal);
+        btnOrderCancel.addEventListener('click', closeOrderModal);
+
+        // Validation client et activation du bouton
+        const submitBtn = document.getElementById('btnOrderSubmit');
+        const requiredFields = [
+            {id:'order_customer_name', err:'err_order_customer_name'},
+            {id:'order_contact', err:'err_order_contact'},
+            {id:'order_size', err:'err_order_size'},
+            {id:'order_color', err:'err_order_color'},
+            {id:'order_delivery', err:'err_order_delivery'},
+            {id:'order_quantity', err:'err_order_quantity'}
+        ];
+
+        function validateForm(){
+            let valid = true;
+            // vérifier que les champs requis contiennent quelque chose (sans marquage rouge)
+            requiredFields.forEach(f=>{
+                const el = document.getElementById(f.id);
+                if(!el) return;
+                let val = el.value;
+                if(typeof val === 'string') val = val.trim();
+                if(!val) valid = false;
+            });
+
+            // payment must be selected
+            const pay = document.querySelector('input[name="payment"]:checked');
+            if(!pay) valid = false;
+
+            // contact validation depending on chosen type (no red messages)
+            const contactType = document.getElementById('order_contact_type');
+            const contactEl = document.getElementById('order_contact');
+            if(contactEl){
+                const raw = (contactEl.value||'').trim();
+                if(!raw){ valid = false; }
+                else if(contactType && contactType.value === 'phone'){
+                    const digitsOnly = raw.replace(/[^0-9]/g,'');
+                    if(digitsOnly.length < 6) valid = false;
+                } else if(contactType && contactType.value === 'email'){
+                    const emailRe = /^\S+@\S+\.\S+$/;
+                    if(!emailRe.test(raw)) valid = false;
+                }
+            }
+
+            // afficher un message global discret si invalide
+            const global = document.getElementById('err_order_form_global');
+            if(!valid){
+                if(global) global.textContent = 'Veuillez remplir tous les champs obligatoires.';
+            } else {
+                if(global) global.textContent = '';
+            }
+
+            submitBtn.disabled = !valid;
+            return valid;
+        }
+
+        // Attacher les écouteurs
+        requiredFields.forEach(f=>{
+            const el = document.getElementById(f.id);
+            if(!el) return;
+            el.addEventListener('input', validateForm);
+            el.addEventListener('change', validateForm);
+        });
+        document.querySelectorAll('input[name="payment"]').forEach(r=> r.addEventListener('change', validateForm));
+        // contact type change
+        const contactTypeSel = document.getElementById('order_contact_type');
+        if(contactTypeSel){
+            contactTypeSel.addEventListener('change', function(){
+                const el = document.getElementById('order_contact');
+                if(!el) return;
+                el.value = '';
+                el.classList.remove('invalid');
+                document.getElementById('err_order_contact').textContent = '';
+                if(contactTypeSel.value === 'phone'){
+                    el.placeholder = '+2250768633906';
+                } else {
+                    el.placeholder = 'exemple@domaine.com';
+                }
+                validateForm();
+            });
+        }
+        // Validation initiale
+        validateForm();
+
+        orderForm.addEventListener('submit', function(e){
+            e.preventDefault();
+            if(!validateForm()){
+                alert('Veuillez remplir tous les champs obligatoires avant de confirmer la commande.');
+                return;
+            }
+
+            submitBtn.disabled = true;
+                const payload = {
+                product_code: document.getElementById('order_product_code').value,
+                product_name: document.getElementById('order_product_name').textContent,
+                customer_name: document.getElementById('order_customer_name').value.trim(),
+                contact: document.getElementById('order_contact').value.trim(),
+                contact_type: document.getElementById('order_contact_type').value,
+                size: document.getElementById('order_size').value,
+                color: document.getElementById('order_color').value.trim(),
+                delivery_address: document.getElementById('order_delivery').value.trim(),
+                quantity: parseInt(document.getElementById('order_quantity').value,10) || 1,
+                payment_method: (document.querySelector('input[name="payment"]:checked')||{}).value || 'wave',
+                note: document.getElementById('order_note').value || ''
+            };
+
+            // POST to API
+            fetch('api/orders.php', {
+                method: 'POST',
+                headers: { 'Content-Type':'application/json' },
+                body: JSON.stringify(payload)
+            }).then(r=>r.json()).then(res=>{
+                submitBtn.disabled = false;
+                if(res && res.success){
+                    alert('Commande enregistrée. Réf: ' + res.order_id);
+                    closeOrderModal();
+                } else {
+                    alert('Erreur: ' + (res.error || 'Impossible d\'enregistrer la commande'));
+                }
+            }).catch(err=>{
+                console.error(err);
+                submitBtn.disabled = false;
+                alert('Erreur réseau lors de l\'envoi de la commande.');
+            });
+        });
+
+        // ------- Reviews: load, submit, edit, rate -------
+        const reviewsList = document.getElementById('reviewsList');
+        const reviewForm = document.getElementById('reviewForm');
+
+        function renderStars(container, current){
+            container.querySelectorAll('.star').forEach(s=>{
+                const v = parseInt(s.dataset.value,10);
+                if(v<=current) s.classList.add('on'); else s.classList.remove('on');
+            });
+        }
+
+        // Note: le widget d'étoiles du formulaire a été retiré — les étoiles restent disponibles uniquement sur les avis publiés
+
+        function createReviewCard(r){
+            const div = document.createElement('div');
+            div.className = 'review-card';
+            div.dataset.id = r.id;
+            const avg = Number(r.avg_rating || 0);
+            div.innerHTML = `
+                <p class="review-text">${escapeHtml(r.message)}</p>
+                <p class="review-author">— ${escapeHtml(r.name)}</p>
+                <div class="stars" data-id="${r.id}">
+                    ${[1,2,3,4,5].map(i=>`<span class="star" data-value="${i}">⭐</span>`).join('')}
+                    <span class="star-count">${avg>0? avg + ' / 5' : ''}</span>
+                </div>
+                <div class="review-actions">
+                    <button class="btn-edit" data-id="${r.id}">Modifier</button>
+                </div>
+                <div class="edit-area" id="edit-area-${r.id}" style="display:none">
+                    <textarea id="edit-text-${r.id}" rows="3">${escapeHtml(r.message)}</textarea>
+                    <div style="margin-top:8px"><button class="btn-submit-edit" data-id="${r.id}">Enregistrer</button> <button class="btn-cancel-edit" data-id="${r.id}">Annuler</button></div>
+                </div>
+            `;
+
+            // wire stars for rating (any visitor can rate)
+            const starsDiv = div.querySelector('.stars');
+            const starsElems = starsDiv.querySelectorAll('.star');
+            function setStarsLocal(count){ renderStars(starsDiv, count); }
+            starsElems.forEach(s=>{
+                s.addEventListener('click', ()=>{
+                    const v = parseInt(s.dataset.value,10);
+                    // visually set
+                    setStarsLocal(v);
+                    // send rating to server
+                    fetch('api/reviews.php', {method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({action:'rate', id: r.id, stars: v})})
+                        .then(res=>res.json()).then(data=>{
+                            if(data && data.avg) starsDiv.querySelector('.star-count').textContent = data.avg + ' / 5';
+                        }).catch(console.error);
+                });
+            });
+
+            // edit button behavior: only show if token in localStorage
+            const editBtn = div.querySelector('.btn-edit');
+            const storedToken = localStorage.getItem('review_edit_' + r.id);
+            if(!storedToken) editBtn.style.display = 'none';
+            editBtn.addEventListener('click', ()=>{
+                const area = document.getElementById('edit-area-' + r.id);
+                area.style.display = area.style.display === 'none' ? 'block' : 'none';
+            });
+
+            // save edit
+            div.querySelector('.btn-submit-edit').addEventListener('click', ()=>{
+                const tid = div.querySelector('.btn-submit-edit').dataset.id;
+                const txt = document.getElementById('edit-text-' + tid).value.trim();
+                const token = localStorage.getItem('review_edit_' + tid);
+                if(!token){ alert('Impossible de modifier: token manquant.'); return; }
+                fetch('api/reviews.php', {method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({action:'update', id:tid, edit_token:token, message:txt})})
+                    .then(res=>res.json()).then(js=>{ if(js && js.success){ div.querySelector('.review-text').textContent = txt; document.getElementById('edit-area-' + tid).style.display='none'; } else { alert('Erreur modification'); } }).catch(console.error);
+            });
+            div.querySelector('.btn-cancel-edit').addEventListener('click', (e)=>{ document.getElementById('edit-area-' + e.target.dataset.id).style.display='none'; });
+
+            return div;
+        }
+
+        function escapeHtml(s){ return String(s).replace(/[&<>\"]/g, c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c])); }
+
+        function loadReviews(){
+            fetch('api/reviews.php').then(r=>r.json()).then(list=>{
+                reviewsList.innerHTML = '';
+                list.forEach(r=>{ reviewsList.appendChild(createReviewCard(r)); });
+            }).catch(err=>{ console.error(err); });
+        }
+
+        // submit new review
+        if(reviewForm){
+            reviewForm.addEventListener('submit', function(e){
+                e.preventDefault();
+                const payload = {
+                    action: 'create',
+                    name: document.getElementById('review-name').value.trim(),
+                    contact: document.getElementById('review-contact').value.trim(),
+                    contact_type: document.getElementById('review_contact_type').value,
+                    message: document.getElementById('review-text').value.trim()
+                };
+                fetch('api/reviews.php', {method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify(payload)})
+                    .then(r=>r.json()).then(res=>{
+                        if(res && res.success){
+                            // store token for editing later
+                            localStorage.setItem('review_edit_' + res.id, res.edit_token);
+                            // reload reviews (or prepend)
+                            loadReviews();
+                            reviewForm.reset();
+                            alert('Merci ! Votre avis est publié.');
+                        } else {
+                            alert('Erreur lors de l\'envoi de l\'avis.');
+                        }
+                    }).catch(err=>{ console.error(err); alert('Erreur réseau'); });
+            });
+        }
+
+        // load on start
+        loadReviews();
+
+    })();
+    </script>
 
 </body>
 </html>
