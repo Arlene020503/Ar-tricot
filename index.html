@@ -22,7 +22,7 @@
 
     <!-- En-tête / Navigation -->
     <header class="main-header">
-        <nav class="nav-container">
+        <nav class="nav-container animate-on-scroll animate-slide-down">
             <div class="logo-area">
                 <a href="#accueil" class="logo-link">
                     <img src="image/logo.jpg" alt="Ar Tricot logo" class="site-logo">
@@ -52,14 +52,14 @@
     <!-- Section À Propos -->
     <section id="a-propos" class="about-section">
         <div class="container">
-            <h2 class="section-title">À propos de Ar Tricot</h2>
+            <h2 class="section-title animate-on-scroll">À propos de Ar Tricot</h2>
             <div class="about-grid">
-                <div class="about-text">
+                <div class="about-text animate-on-scroll animate-slide-right">
                     <p class="lead">Bienvenue dans notre univers de créations artisanales où chaque fil raconte une histoire et chaque pièce est une œuvre d'art unique.</p>
                     <p>Ar Tricot est une marque ivoirienne spécialisée dans le tricot et le crochet faits main. Nous créons des pièces sur mesure avec passion et attention aux détails. Que vous recherchiez des accessoires élégants, des vêtements uniques ou des pièces décoratives, notre boutique est votre destination pour des créations qui émerveillent.</p>
                     <p class="highlight">Chaque création est pensée et réalisée avec soin pour vous offrir qualité et originalité.</p>
                 </div>
-                <div class="about-image-slot">
+                <div class="about-image-slot animate-on-scroll animate-slide-left">
                     <div class="image-empty-state">
                         <img src="image/logo.jpg" alt="Ar Tricot">
                     </div>
@@ -71,7 +71,7 @@
     <!-- Section Boutique / Articles -->
     <section id="boutique" class="shop-section">
         <div class="container">
-            <h2 class="section-title">Nos Créations</h2>
+            <h2 class="section-title animate-on-scroll">Nos Créations</h2>
             <div class="product-grid">
                 <article class="product-card">
                     <div class="product-image">
@@ -167,7 +167,7 @@
     <!-- Section Avis Clients -->
     <section id="avis" class="reviews-section">
         <div class="container">
-            <h2 class="section-title">Avis clients</h2>
+            <h2 class="section-title animate-on-scroll">Avis clients</h2>
             
             <div class="reviews-display">
                 <div class="review-card">
@@ -224,9 +224,9 @@
     <!-- Section Contact -->
     <section id="contact" class="contact-section">
         <div class="container">
-            <h2 class="section-title">Contactez-nous</h2>
+            <h2 class="section-title animate-on-scroll">Contactez-nous</h2>
             <div class="contact-content">
-                <div class="contact-info">
+                <div class="contact-info animate-on-scroll animate-fade">
                     <h3>Une question ? Une commande sur mesure ?</h3>
                     <p>N'hésitez pas à nous contacter via WhatsApp pour toute demande. Nous sommes à votre écoute pour créer la pièce de vos rêves.</p>
                     <a href="https://wa.me/2250768633906" target="_blank" class="btn-whatsapp">
@@ -236,7 +236,7 @@
                 <div class="social-links">
                     <h3>Retrouvez-nous sur :</h3>
                     <div class="social-icons">
-                        <a href="https://wa.me/2250768633906" target="_blank" class="social-item">
+                        <a href="https://wa.me/2250768633906" target="_blank" class="social-item animate-on-scroll animate-fade">
                             <img src="https://cdn-icons-png.flaticon.com/512/733/733585.png" alt="WhatsApp">
                             <span>07 68 63 39 06</span>
                         </a>
@@ -332,6 +332,22 @@
                 openModal([img.src], 0);
             });
         });
+
+        // animation au scroll - intersection observer
+        const animateObserver = new IntersectionObserver((entries, obs) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('in-view');
+                    obs.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1 });
+
+        // ajouter classe automatiquement à certains éléments pour éviter de modifier chaque card
+        const autoTargets = document.querySelectorAll('section h2, .about-text, .about-image-slot, .product-card, .review-card, .contact-info, .social-item, .nav-container');
+        autoTargets.forEach(el => el.classList.add('animate-on-scroll'));
+
+        document.querySelectorAll('.animate-on-scroll').forEach(el => animateObserver.observe(el));
 
     })();
     </script>
