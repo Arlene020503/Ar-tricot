@@ -126,6 +126,11 @@ h1, h2, h3 {
     padding: 0 30px;
 }
 
+/* make burger sit at right edge when visible */
+.burger {
+    margin-left: auto;
+}
+
 .logo-link {
     display: inline-flex;
     align-items: center;
