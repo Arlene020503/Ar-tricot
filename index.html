@@ -29,6 +29,7 @@
                     <span class="logo-text">Ar Tricot</span>
                 </a>
             </div>
+            <button class="burger" aria-label="Menu"><i class="bi bi-list"></i></button>
             <ul class="nav-links">
                 <li><a href="#accueil">Accueil</a></li>
                 <li><a href="#a-propos">À propos</a></li>
@@ -344,6 +345,13 @@ Chez Ar Tricot, rien n’est laissé au hasard. <br> Les matières sont sélecti
         });
 
         // animation au scroll - intersection observer
+
+        // burger toggle
+        const burger = document.querySelector('.burger');
+        const navContainer = document.querySelector('.nav-container');
+        burger.addEventListener('click', () => {
+            navContainer.classList.toggle('nav-open');
+        });
         const animateObserver = new IntersectionObserver((entries, obs) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {

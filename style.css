@@ -156,6 +156,43 @@ h1, h2, h3 {
     gap: 10px;
 }
 
+.burger {
+    display: none;
+    background: none;
+    border: none;
+    font-size: 1.6rem;
+    cursor: pointer;
+    color: var(--primary-color);
+}
+.burger:focus {
+    outline: none;
+}
+
+/* mobile-specific nav */
+@media (max-width: 768px) {
+    .nav-container {
+        position: relative;
+    }
+    .nav-links {
+        display: none;
+        flex-direction: column;
+        gap: 15px;
+        background: var(--white);
+        position: absolute;
+        top: 100%;
+        right: 0;
+        width: 100%;
+        padding: 20px 30px;
+        box-shadow: var(--shadow-md);
+    }
+    .nav-container.nav-open .nav-links {
+        display: flex;
+    }
+    .burger {
+        display: block;
+    }
+}
+
 .nav-links li {
     margin-left: 0;
 }
