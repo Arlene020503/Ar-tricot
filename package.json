@@ -1,0 +1,14 @@
+{
+  "name": "ar-tricot-site",
+  "version": "1.0.0",
+  "description": "Site dynamique pour Ar Tricot avec gestion des avis clients",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.18.2"
+  },
+  "author": "Arlène Assoua",
+  "license": "MIT"
+}

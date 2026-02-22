@@ -196,28 +196,7 @@
             </form>
 
             <div class="reviews-display" id="reviewsContainer">
-                <div class="review-card">
-                    <div class="stars">
-                        <span class="star on"><i class="bi bi-star-fill"></i></span>
-                        <span class="star on"><i class="bi bi-star-fill"></i></span>
-                        <span class="star on"><i class="bi bi-star-fill"></i></span>
-                        <span class="star on"><i class="bi bi-star-fill"></i></span>
-                        <span class="star on"><i class="bi bi-star-fill"></i></span>
-                    </div>
-                    <p class="review-text">Des créations magnifiques et de très bonne qualité ! Le service est excellent et les pièces sont vraiment uniques. Je recommande vivement Ar Tricot.</p>
-                    <p class="review-author">— Ange-Audrey Kouamé</p>
-                </div>
-
-                <div class="review-card">
-                    <div class="stars">
-                        <span class="star on"><i class="bi bi-star-fill"></i></span>
-                        <span class="star on"><i class="bi bi-star-fill"></i></span>
-                        <span class="star on"><i class="bi bi-star-fill"></i></span>
-                        <span class="star on"><i class="bi bi-star-fill"></i></span>
-                        <span class="star on"><i class="bi bi-star-fill"></i></span>
-                    </div>
-                    <p class="review-text">J'ai commandé un bonnet et je suis ravie ! La finition est parfaite et le modèle est exactement comme sur la photo. Très professionnel.</p>
-                    <p class="review-author">— Wajidat Oyedele</p>
+                <!-- les avis seront insérés ici dynamiquement -->
                 </div>
 
                 <div class="review-card">
@@ -404,23 +383,19 @@
 
         document.querySelectorAll('.animate-on-scroll').forEach(el => animateObserver.observe(el));
 
-        /* review form logic */
-        const reviewsKey = 'artricot_reviews';
+        /* review form logic using backend API */
         const reviewsContainer = document.getElementById('reviewsContainer');
         const reviewForm = document.getElementById('reviewForm');
 
-        function saveReviews(reviews) {
-            localStorage.setItem(reviewsKey, JSON.stringify(reviews));
+        async function fetchReviews() {
+            const res = await fetch('/api/reviews');
+            if (!res.ok) throw new Error('Erreur lecture avis');
+            return res.json();
         }
-        function loadReviews() {
-            const data = localStorage.getItem(reviewsKey);
-            return data ? JSON.parse(data) : [];
-        }
-        function renderReviews() {
-            const reviews = loadReviews();
-            // clear existing (except initial static ones)
+        async function renderReviews() {
+            const reviews = await fetchReviews();
             reviewsContainer.innerHTML = '';
-            reviews.forEach((r, idx) => {
+            reviews.forEach((r) => {
                 const card = document.createElement('div');
                 card.className = 'review-card';
 
@@ -448,7 +423,7 @@
                 del.className = 'delete-btn';
                 del.innerHTML = '&times;';
                 del.addEventListener('click', () => {
-                    deleteReview(idx);
+                    deleteReview(r.id);
                 });
                 card.appendChild(del);
 
@@ -456,32 +431,32 @@
             });
         }
 
-        function addReview(review) {
-            const reviews = loadReviews();
-            reviews.push(review);
-            saveReviews(reviews);
+        async function addReview(review) {
+            await fetch('/api/reviews', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(review)
+            });
             renderReviews();
         }
-        function deleteReview(index) {
-            const reviews = loadReviews();
-            reviews.splice(index, 1);
-            saveReviews(reviews);
+        async function deleteReview(id) {
+            await fetch('/api/reviews/' + id, { method: 'DELETE' });
             renderReviews();
         }
 
-        reviewForm.addEventListener('submit', (e) => {
+        reviewForm.addEventListener('submit', async (e) => {
             e.preventDefault();
             const name = document.getElementById('reviewerName').value.trim();
             const rating = parseInt(document.getElementById('reviewRating').value, 10);
             const text = document.getElementById('reviewText').value.trim();
             if (name && text) {
-                addReview({ name, rating, text });
+                await addReview({ name, rating, text });
                 reviewForm.reset();
             }
         });
 
         // initial render
-        renderReviews();
+        renderReviews().catch(console.error);
 
     })();
     </script>
